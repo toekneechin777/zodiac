@@ -1,0 +1,10 @@
+models:
+  - yolo:
+    - yolo/yolo_001.yaml
+data: coco
+epochs: 10
+batch-size: 16
+img-size: 640
+optimizer: SGD # choices=['SGD', 'Adam', 'AdamW']
+resume: False
+save_period: -1 # Save checkpoint every x epochs (disabled if < 1)'
