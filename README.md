@@ -5,6 +5,8 @@
 One Click Deploy for Training and Inference of Object Detection Models
 
 ```
-python3 -m venv .venv
+conda create -n zodiac python=3
+source activate zodiac
+pip3 install -r requirements.txt
 ```
 
