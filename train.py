@@ -4,13 +4,49 @@ import argparse
 
 from pathlib import Path
 
-from utils.general import parse_train_config, get_latest_run, load_weights, LOGGER
+from utils.general import parse_train_config, get_latest_run, load_weights, init_seeds, check_dataset, LOGGER
+
+LOCAL_RANK = int(os.getenv('LOCAL_RANK', -1)) 
+RANK = int(os.getenv('RANK', -1))
+WORLD_SIZE = int(os.getenv('WORLD_SIZE', 1))
 
 def train(config, weights):
     save_dir, epochs, batch_size = Path(config['save-dir']), config['epochs'], config['batch-size']
 
+    # Where to output weights
     weights_dir = save_dir / 'weights'
     last, best = weights_dir / 'last.pt', weights_dir / 'best.pt'
+
+    # Load Hyperparameters
+    hyp = config['hyperparameters']
+
+    # Things to Implement:
+    # Evolving Hyperparameters
+    # DDP (Distributed Data Parallel)
+
+    #Config
+    cuda = config['device-type'] != 'cpu'
+    init_seeds(1+RANK)
+    check_dataset(config['data'])
+
+    # Model
+
+    # Freeze Layers
+
+    # Image Size
+
+    # Batch Size
+
+    # Optimizer
+
+    # Scheduler
+
+    # Resume
+
+    # Data Train Loader
+
+    # Start Training
+
 
 def main(args):
     config = parse_train_config(args.train_config)
@@ -25,10 +61,6 @@ def main(args):
     # Otherwise load default weights
     else:
         weights = load_weights(config['models'])
-    
-    # Things to Implement:
-    # Evolving Hyperparameters
-    # DDP (Distributed Data Parallel)
 
     train(config, weights)
     

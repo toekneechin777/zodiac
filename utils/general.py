@@ -1,7 +1,13 @@
 import yaml
+import random
 import logging
 import glob
 import os
+
+import torch
+import torchvision
+import numpy as np
+import pandas as pd
 
 from downloads import attempt_download
 
@@ -47,4 +53,20 @@ def load_weights(models):
 def get_latest_run(search_dir = './experiments/'):
     last_list = glob.glob(f'{search_dir}/**/latest*.pt', recursive=True)
     return max(last_list, key=os.path.getctime) if last_list else ''
-    
+
+def init_seeds(seed=0):
+    import torch.backends.cudnn as cudnn
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    cudnn.benchmark, cudnn.deterministic = (False, True) if seed == 0 else (True, False)
+
+def check_dataset(data):
+    isdir = os.path.isdir('data')
+    if isdir:
+        pass
+        # To do
+    else:
+        pass
+        # raise exception or download manually
+    # generate data dictionary

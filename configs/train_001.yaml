@@ -8,6 +8,7 @@ img-size: 640
 optimizer: SGD # choices=['SGD', 'Adam', 'AdamW']
 resume: False
 save-period: -1 # Save checkpoint every x epochs (disabled if < 1)'
+device: gpu
 hyperparameters:
   lr0: 0.01 # initial learning rate
   # lrf: 0.01 # final OneCycleLR learning (lr0 * lrf)
